@@ -17,5 +17,5 @@ $(document).ready(function() {
   }
 
   // Bind debounced click handler
-  $('button').on('click', _.debounce(updateCounter, 300));
+  $('button').on('click', _.debounce(updateCounter, 500));
 });
