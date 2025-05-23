@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
   },
     body: {
     // your body styles here
+    
   },
   footer: {
     // your footer styles here
