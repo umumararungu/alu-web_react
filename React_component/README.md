@@ -1,1 +1,1 @@
-# React_component
+# React_component directory
