@@ -81,6 +81,12 @@ const styles = StyleSheet.create({
     position: "relative",
     fontFamily: "Arial, Helvetica, sans-serif",
   },
+    body: {
+    // your body styles here
+  },
+  footer: {
+    // your footer styles here
+  },
 });
 
 App.defaultProps = {
