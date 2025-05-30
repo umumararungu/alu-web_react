@@ -87,3 +87,17 @@ describe('<App />', () => {
         window.alert.mockRestore();
     })
 });
+
+  describe('handleHideDrawer', () => {
+    it('should update the state to hide notifications', () => {
+      const wrapper = shallow(<App />);
+      // Set initial state to true
+      wrapper.setState({ displayDrawer: true });
+      
+      // Call instance method
+      wrapper.instance().handleHideDrawer();
+      
+      // State should now be false
+      expect(wrapper.state().displayDrawer).toBe(false);
+    });
+  });
