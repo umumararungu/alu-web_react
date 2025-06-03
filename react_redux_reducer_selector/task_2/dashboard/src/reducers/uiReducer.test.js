@@ -1,4 +1,4 @@
-import uiReducer from './uiReducer';
+import uiReducer from './uiReducers';
 import { Map } from 'immutable';
 import {
   DISPLAY_NOTIFICATION_DRAWER,
