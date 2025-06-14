@@ -4,7 +4,9 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
+import { fromJS } from 'immutable';
 import App from './App';
+import { mapStateToProps } from './App'; // Import mapStateToProps
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -32,14 +34,14 @@ describe('<App />', () => {
     it('verifies that the default state for displayDrawer is false', () => {
         const wrapper = shallow(<App />);
         expect(wrapper.state('displayDrawer')).toBe(false);
-    })
+    });
 
-    if ('verifies that the state property displayDrawer correctly updates', () => {
-        const wrapper = mount(<App />);
-        wrapper.handleDisplayDrawer();
-        expect(wrapper.state('displayDrawer')).to.equal('true');
-        wrapper.handleHideDrawer();
-        expect(wrapper.state('displayDrawer')).to.equal('false');
+    it('verifies that the state property displayDrawer correctly updates', () => {
+        const wrapper = shallow(<App />);
+        wrapper.instance().handleDisplayDrawer();
+        expect(wrapper.state('displayDrawer')).toBe(true);
+        wrapper.instance().handleHideDrawer();
+        expect(wrapper.state('displayDrawer')).toBe(false);
     });
 
     it('renders an <App /> component checking for <Notifications />', () => {
@@ -77,7 +79,7 @@ describe('<App />', () => {
     it('verifies that the user can log out using ctrl + h', () => {
         const events = {};
         window.addEventListener = jest.fn().mockImplementation((event, cb) => {
-            events[ event ] = cb;
+            events[event] = cb;
         });
         window.alert = jest.fn();
 
@@ -86,5 +88,27 @@ describe('<App />', () => {
         expect(window.alert).toHaveBeenCalledWith("Logging you out");
         expect(wrapper.state('user').isLoggedIn).toBe(false);
         window.alert.mockRestore();
+    });
+});
+
+describe('mapStateToProps', () => {
+    it('should return the right object when passing the state with isUserLoggedIn true', () => {
+        let state = fromJS({
+            isUserLoggedIn: true
+        });
+        const expectedResult = {
+            isLoggedIn: true
+        };
+        expect(mapStateToProps(state)).toEqual(expectedResult);
+    });
+
+    it('should return the right object when passing the state with isUserLoggedIn false', () => {
+        let state = fromJS({
+            isUserLoggedIn: false
+        });
+        const expectedResult = {
+            isLoggedIn: false
+        };
+        expect(mapStateToProps(state)).toEqual(expectedResult);
     });
 });
